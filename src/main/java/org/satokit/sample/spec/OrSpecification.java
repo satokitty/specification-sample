@@ -7,16 +7,24 @@ import org.apache.commons.lang.Validate;
  * @param <T> 仕様検証対象オブジェクトの型
  */
 public class OrSpecification<T> implements Specification<T> {
+    /** 左辺となる仕様 */
+    private final Specification<T> left;
+    /** 右辺となる仕様 */
+    private final Specification<T> right;
 
     /**
+     * 論理和を取る仕様オブジェクトを2つ与えて論理和仕様インスタンスを生成する.
      *
-     * @param left
-     * @param right
+     * @param left 左辺
+     * @param right 右辺
      * @throws IllegalArgumentException {@code left, right}のいずれかでも{@code null}の場合.
      */
     public OrSpecification(Specification<T> left, Specification<T> right) {
         Validate.notNull(left, "left must not be null.");
         Validate.notNull(right, "right must not be null.");
+
+        this.left = left;
+        this.right = right;
     }
 
     /**
@@ -27,6 +35,8 @@ public class OrSpecification<T> implements Specification<T> {
      */
     @Override
     public boolean isSatisfied(T target) {
-        return false;  // TODO: implements method.
+        Validate.notNull(target, "target must not be null.");
+        return left.isSatisfied(target)
+                || right.isSatisfied(target);
     }
 }
