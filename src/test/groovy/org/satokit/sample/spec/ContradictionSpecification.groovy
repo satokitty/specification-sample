@@ -1,18 +1,16 @@
 package org.satokit.sample.spec
 
 /**
- * 恒真.
+ * 恒偽.
  */
-class TautologySpecification<T> implements Specification<T> {
-
+class ContradictionSpecification<T> implements Specification<T> {
     @Override
     boolean isSatisfied(T target) {
-        return true
+        return false
     }
 
     @Override
     String toString() {
-        return "true"
+        return "false"
     }
 }
-
