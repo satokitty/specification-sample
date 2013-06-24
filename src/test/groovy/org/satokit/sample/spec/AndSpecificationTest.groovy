@@ -74,24 +74,24 @@ class AndSpecificationSpec {
 
         def "左辺が仕様を満たさない場合、短絡評価される"() {
             given:
-            def spec1 = Mock(Specification)
-            def spec2 = Mock(Specification)
+            def left = Mock(Specification)
+            def right = Mock(Specification)
 
-            spec1.isSatisfied(_) >> false
-            spec2.isSatisfied(_) >> true
+            left.isSatisfied(_) >> false
+            right.isSatisfied(_) >> true
 
             and:
-            def sut = new AndSpecification<DummyInput>(spec1, spec2)
+            def sut = new AndSpecification<DummyInput>(left, right)
 
             when:
             sut.isSatisfied(input)
 
             then:
-            1 * spec1.isSatisfied(input)
-            0 * spec2.isSatisfied(input)
+            1 * left.isSatisfied(input)
+            0 * right.isSatisfied(input)
         }
 
-        def "AndSpecificationは入れ子にできる"() {
+        def "AndSpecificationはネストできる"() {
             given:
             def spec1 = new AndSpecification<DummyInput>(spec1left, spec1right)
             def spec2 = new AndSpecification<DummyInput>(spec2left, spec2right)
