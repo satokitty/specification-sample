@@ -17,7 +17,8 @@ public class OrSpecification<T> implements Specification<T> {
      *
      * @param left 左辺
      * @param right 右辺
-     * @throws IllegalArgumentException {@code left, right}のいずれかでも{@code null}の場合.
+     * @throws IllegalArgumentException
+     *          {@code left == null || right == null}
      */
     public OrSpecification(Specification<T> left, Specification<T> right) {
         Validate.notNull(left, "left must not be null.");
@@ -32,6 +33,7 @@ public class OrSpecification<T> implements Specification<T> {
      *
      * @param target 仕様検証対象のオブジェクト
      * @return {@code target}が仕様を満たしている場合{@code true}, 満たしていない場合{@code false}.
+     * @throws IllegalArgumentException {@code target == null}
      */
     @Override
     public boolean isSatisfied(T target) {
