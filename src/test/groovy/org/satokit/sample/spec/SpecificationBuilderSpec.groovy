@@ -65,7 +65,7 @@ class SpecificationBuilderSpec extends spock.lang.Specification {
         contradiction | contradiction || false
     }
 
-    def "メソッドチェーンしてSpecificationオブジェクトを組み合わせる場合、完成した仕様オブジェクトは右辺から評価される"() {
+    def "メソッドチェーンしてSpecificationオブジェクトを組み合わせる"() {
         given:
         def sut = new SpecificationBuilder<DummyInput>(initial)
 
